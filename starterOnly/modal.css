@@ -1,14 +1,22 @@
+/*********************/
+/***** VARIABLES *****/
+/*********************/
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
 }
+
+/*********************/
+/*** LANDING PAGE ****/
+/*********************/
+
+/****** General ******/
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-/* Landing Page */
 
 body {
   margin: 0;
@@ -30,16 +38,25 @@ img {
   padding-right: 1rem;
 }
 
+/****** Header *******/
 .topnav {
   overflow: hidden;
   margin: 3.5%;
 }
+
 .header-logo {
-    float: left;
+  float: left;
 }
+
+.header-logo img {
+  width: auto;
+  height: auto;
+}
+
 .main-navbar {
     float: right;
 }
+
 .topnav a {
   float: left;
   display: block;
@@ -68,38 +85,7 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
 
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
 
 main {
   font-size: 130%;
@@ -131,11 +117,14 @@ main {
   background: #3876ac;
 }
 
+/****** Footer *******/
 .footer {
   margin: 20px;
   padding: 10px;
   font-family: var(--font-slab);
 }
+
+
 
 /* Modal form */
 
@@ -527,3 +516,39 @@ footer {
   }
 }
 
+
+/*********************/
+/*** MEDIA QUERIES ***/
+/*********************/
+
+/****** Header *******/
+@media screen and (max-width: 768px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+ @media screen and (max-width: 540px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -15px;
+  }
+} 

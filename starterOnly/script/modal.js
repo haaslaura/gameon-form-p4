@@ -20,24 +20,26 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-/* AJOUTS*/
 
-// Récupérer le bouton
+/* WORK IN PROGRESS*/
+
+// Recover button close
 const closeBtn = document.querySelector(".close")
 
-// Fonction pour fermer la modale
+// Function for closing modal
 function closeModal() {
   modalbg.style.display = "none";
 }
 
+// Close modal at click event
 closeBtn.addEventListener("click", () => {
   closeModal()
 })
 
-// Ajout d'un événement click sur le document
+// Close modal at click outside the modal
 modalbg.addEventListener("click", (event) => {
-    // Vérifier si le clic est en dehors de la modal
+    // Check if the click is outside the modal
     if (event.target === modalbg) {
-        closeModal(); // Fermer la modal
+        closeModal();
     }
 });

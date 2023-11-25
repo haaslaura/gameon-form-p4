@@ -403,6 +403,7 @@ input[data-error]::after {
 
 
 /* custom select styles */
+  /******************** À comprendre / corriger ********************/
 .custom-select {
   position: relative;
   font-family: Arial;
@@ -501,27 +502,29 @@ input[data-error]::after {
 /*** MEDIA QUERIES ***/
 /*********************/
 
-/* BREAKPOINT :
-. Large screen: 1300px and more
-. Min screen & horizontal tablet: 1140px
-. Tablette : 800px
-. Smartphone: 768px max
+/* BREAKPOINT
+Extra Large: 1300px and more
+Large: 900px to 1140px
+Medium: 768px to 899px
+Small: less than 768px
+Extra Small : less than 576px
 */
 
-/****** Min screen *******/
+
+/****** Large screen *******/
 @media screen and (max-width: 1140px) {
   /*** Hero section ***/
   .header-logo img {
     height: 25px;
   }
-
   .hero-headline {
     font-size: 4.7rem;
   }
 }
 
-/****** Tablette *******/
-@media screen and (max-width: 800px) {
+
+/****** Medium screen *******/
+@media screen and (max-width: 899px) {
   /*** Header ***/
   .main-navbar span {
     display: none;
@@ -539,8 +542,7 @@ input[data-error]::after {
   }
 
   /* Only burger menu */
-  /* À comprendre / corriger */
-  /*
+  /******************** À comprendre / corriger ********************/
   .topnav .responsive {
     position: relative;
   }
@@ -553,9 +555,44 @@ input[data-error]::after {
     float: none;
     display: block;
     text-align: left;
-  }*/
+  }
+
+  /*
+  VERSION PRECEDENTE
+  @media screen and (max-width: 768px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    .topnav a {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+      margin-top: -15px;
+    }
+  } 
+  */
+
+  /*** Hero section ***/
+  .hero-headline {
+    font-size: 4.2rem;
+    white-space: normal;
+  }
+}
 
 
+/****** Small screen *******/
+@media screen and (max-width: 768px) {
   /*** Hero section ***/
   .hero-section {
     display: flex;
@@ -571,6 +608,9 @@ input[data-error]::after {
   .desk-btn {
     display: none;
   }
+  .hero-headline {
+    font-size: 3.5rem;
+  }
   .hero-text {
     width: unset;
     font-size: 1.5rem;
@@ -583,15 +623,6 @@ input[data-error]::after {
   .smart-btn {
     display: block;
     margin: 32px auto 10px auto;
-  }
-}
-
-
-@media screen and (max-width: 768px) {
-  /*** Hero section ***/
-  .hero-headline {
-    font-size: 3.5rem;
-    white-space: normal;
   }
 
   /*** Modal ***/
@@ -617,28 +648,15 @@ input[data-error]::after {
   }
 }
 
-/*
-VERSION PRECEDENTE
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
+/****** Extra small screen *******/
+@media screen and (max-width: 575px) {
+  /*** Hero section ***/
+  .hero-headline {
+    font-size: 2.8rem;
+    white-space: normal;
   }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
+  .hero-text {
+    font-size: 1.2rem;
+    white-space: normal;
   }
 }
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
-*/

@@ -632,12 +632,14 @@ Extra Small : less than 576px
   }
   .content {
     position: fixed;
+    left: 0;
     top: var(--height-topnav);
     width: 100%;
     max-width: 100%;
     height: 100%;
     border-radius: 10px 10px 0 0;
     box-sizing: border-box;
+    overflow-y: scroll;
   }
   
   /*** Footer ***/

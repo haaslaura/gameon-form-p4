@@ -65,133 +65,133 @@ modalbg.addEventListener("click", (event) => {
 /** ERROR MESSAGES ***/
 /*********************/
 
-// Note : voir aussi pour ajouter un event blur si l'utilisateur quitte le champs ?
-
+// Submit event
 form.addEventListener ("submit", (event) => {
-  // Prevent page reload
-  event.preventDefault();  
-
-  // Boucle pour récupérer la nodeList formData
-  for (i = 0; i < formData.length; i++) {
-
-    // Récupérer le type de l'input de chaque formData
-    let typeInputCase = formData[i].querySelector("input").type;
-    console.log(typeInputCase);
-
-    // Récupérer la valeur de l'input de chaque formData    
-    let valueInput = formData[i].querySelector("input").value;
-    console.log(valueInput);
-
-    // Création d'une expression régulière pour vérifier l'email
-    let regexMail = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+");
-
-
-    // Chaque erreur et le message à afficher
-
-    // Les 2 champs text
-    if (typeInputCase === 'text') {
-      if (!valueInput){
-        console.log("Le champs est vide");
-        formData[i].setAttribute("data-error", "Le champs est vide.");
-      } else if (valueInput.length <= 2){
-        console.log("Erreur dans la longueur du champs texte");
-        formData[i].setAttribute("data-error", "Entrez au moins deux caractères.");
-      } else {
-      console.log("Le champs texte est correcte");
-      formData[i].removeAttribute("data-error");
-      }
-    }
-
-    // Le champ Email
-    if (typeInputCase === 'email') {
-      if (!valueInput) {
-        console.log("Erreur le champs mail est vide");
-        formData[i].setAttribute("data-error", "Erreur le champs mail est vide.");
-      } else if (regexMail.test(valueInput) === false) {
-        console.log("Erreur ceci n'est pas un email");
-        formData[i].setAttribute("data-error", "Erreur ceci n'est pas un email valide.");
-      } else {
-        console.log("Le mail est correct");
-        formData[i].removeAttribute("data-error");
-      }
-    }
-
-    // Champs Date de naissance
-    if (typeInputCase === 'date') {
-      const today = new Date();
-      const selectedDate = new Date(valueInput);
-
-      if (!valueInput) {
-        console.log("erreur le champs date est vide");
-        formData[i].setAttribute("data-error", "Erreur le champs date est vide.");
-      } else if (selectedDate > today) {
-        console.log("erreur la date est postérieure à aujourd'hui");
-        formData[i].setAttribute("data-error", "Erreur la date est postérieure à aujourd'hui.");
-      } else {
-        console.log("le champs date est correct");
-        formData[i].removeAttribute("data-error");
-      }
-    }
-
-    // Champs nombre de tournois
-    if (typeInputCase === 'number') {
-      if (!valueInput) {
-        console.log("Le champs nombre est vide");
-        formData[i].setAttribute("data-error", "Erreur le champs nombre est vide.");
-      } else if (valueInput > 99) {
-        console.log("Erreur avec le champs nombre");
-        formData[i].setAttribute("data-error", "Erreur, maximum à 99.");
-      } else {
-        console.log("Le champs nombre est correctement rempli");
-        formData[i].removeAttribute("data-error");
-      }
-    }
-
-    // Champs nombre de tournois
-    if (typeInputCase === 'radio') {
-      
-      // Récupérer tous les éléments 'location'
-      let locationInput = document.querySelectorAll('input[name="location"]');
-
-      // Flag pour indiquer s'il y a une erreur
-      let errorFlag = true;
-
-      // Parcourir tous les éléments
-      for (let r = 0; r < locationInput.length; r++) {
-
-        if (locationInput[r].checked) {
-          errorFlag = false; // S'il y a au moins un élément sélectionné, pas d'erreur
-          break; // Sortir de la boucle dès qu'un élément est sélectionné
-        }
-      }
-    
-      if (errorFlag) {
-        console.log("Aucune checkbox sélectionnée");
-        formData[i].setAttribute("data-error", "Nous vous invitons à sélectionner un tournoi.");
-      } else {
-        console.log("Le champ tournois est correctement rempli");
-        formData[i].removeAttribute("data-error");
-      }
-    }
-  }
-
-  // Checkbox conditions d'utilisation
-
-  // On récupère la ckeckbox des CU par son ID
-  let accepterCU = document.getElementById("checkbox1")
-  // On récupère le label
-  let labelCU = document.querySelector(".checkbox2-label")
-
-  if (!accepterCU.checked) {
-    console.log("La checkbox1 n'est pas cochée");
-    labelCU.classList.add("error-cu");
-    labelCU.setAttribute("data-error", "Vous devez accepter nos conditions d'utilisation pour continuer.");
-
-
-  } else {
-    console.log("La checkbox1 est bien cochée");
-
-  }
-
+  event.preventDefault();
+  displayErrorMessages();
   calculateHeight();
 });
+
+// NOTE : ajouter un évènement 'blur' si l'utilisateur quitte le champs
+
+
+// Function to display error message
+function displayErrorMessages() {
+
+  // Retrieve the nodeList formData
+  for (i = 0; i < formData.length; i++) {
+
+    // For each FormData div, retrieve the input
+    let typeInputCase = formData[i].querySelector("input").type;
+
+    // For each input, retrive his value    
+    let valueInput = formData[i].querySelector("input").value.trim();
+
+    // List of errors and messages
+    switch (typeInputCase) {
+      // Text fields
+      case 'text':
+        if (!valueInput){
+          console.log("Le champs est vide");
+          formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
+        } else if (valueInput.length <= 2){
+          console.log("Erreur dans la longueur du champs texte");
+          formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
+        } else {
+        console.log("Le champs texte est correcte");
+        formData[i].removeAttribute("data-error");
+        }
+        break;
+
+      // Email field
+      case 'email':
+        // Regular expression to check the email
+        let regexMail = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+");
+        if (!valueInput) {
+          console.log("Erreur le champs mail est vide");
+          formData[i].setAttribute("data-error", "Merci de nous indiquer votre email.");
+        } else if (regexMail.test(valueInput) === false) {
+          console.log("Erreur ceci n'est pas un email");
+          formData[i].setAttribute("data-error", "Merci de nous indiquer un email valide.");
+        } else {
+          console.log("Le mail est correct");
+          formData[i].removeAttribute("data-error");
+        }
+        break;
+
+      // Date field
+      case 'date':
+        const today = new Date();
+        const selectedDate = new Date(valueInput);
+
+        if (!valueInput) {
+          console.log("erreur le champs date est vide");
+          formData[i].setAttribute("data-error", "Vous devez entrer votre date de naissance.");
+        } else if (selectedDate > today) {
+          console.log("erreur la date est postérieure à aujourd'hui");
+          formData[i].setAttribute("data-error", "Erreur: la date est postérieure à aujourd'hui.");
+        } else {
+          console.log("le champs date est correct");
+          formData[i].removeAttribute("data-error");
+        }
+        break;
+      
+      // Tournament number field
+      case 'number':
+        if (!valueInput) {
+          console.log("Le champs nombre est vide");
+          formData[i].setAttribute("data-error", "Merci de compléter ce champs.");
+        } else if (valueInput > 99) {
+          console.log("Erreur avec le champs nombre");
+          formData[i].setAttribute("data-error", "99 maximum.");
+        } else {
+          console.log("Le champs nombre est correctement rempli");
+          formData[i].removeAttribute("data-error");
+        }
+        break;
+      
+      // Tournament choice field
+      case 'radio':  
+        // Retrieve 'location' elements
+        let locationInput = document.querySelectorAll('input[name="location"]');
+
+        // Indicate if there is an error
+        let errorFlag = true;
+
+        for (let r = 0; r < locationInput.length; r++) {
+          if (locationInput[r].checked) {
+            errorFlag = false; // If there is at least one item selected, no error
+            break; // Exit the loop as soon as an item is selected
+          }
+        }
+
+        if (errorFlag) {
+          console.log("Aucune tournois sélectionnée");
+          formData[i].setAttribute("data-error", "Vous devez choisir une option.");
+        } else {
+          console.log("Le tournois est correctement sélectionné");
+          formData[i].removeAttribute("data-error");
+        }
+        break;
+
+      // Conditions of use field
+      case 'checkbox':
+        // Retrieve CU checkbox by ID
+        let accepterCU = document.getElementById("checkbox1")
+        
+        // Retrieve the label element
+        let labelCU = document.querySelector(".checkbox2-label")
+
+        if (!accepterCU.checked) {
+          console.log("La checkbox1 n'est pas cochée");
+          labelCU.classList.add("error-cu");
+          labelCU.setAttribute("data-error", "Vous devez accepter nos conditions d'utilisation pour continuer.");
+        } else {
+          console.log("La checkbox1 est bien cochée");
+          labelCU.classList.remove("error-cu");
+          labelCU.removeAttribute("data-error");
+        }
+        break;
+    }
+  }
+}

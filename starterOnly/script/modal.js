@@ -4,11 +4,11 @@ This file contains the function for project
 
 *******************************************************/
 
-// ??
+// Function to switch to the burger menu
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
-    x.className += "responsive";
+    x.className += " responsive";
   } else {
     x.className = "topnav";
   }
@@ -72,7 +72,7 @@ form.addEventListener ("submit", (event) => {
   calculateHeight();
 });
 
-// NOTE : ajouter un évènement 'blur' si l'utilisateur quitte le champs
+// NOTE : ajouter un évènement 'blur' si l'utilisateur quitte le champs?
 
 
 // Function to display error message
@@ -94,7 +94,7 @@ function displayErrorMessages() {
         if (!valueInput){
           console.log("Le champs est vide");
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
-        } else if (valueInput.length <= 2){
+        } else if (valueInput.length < 2){
           console.log("Erreur dans la longueur du champs texte");
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
         } else {

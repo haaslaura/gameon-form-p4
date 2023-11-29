@@ -72,8 +72,6 @@ form.addEventListener ("submit", (event) => {
   calculateHeight();
 });
 
-// NOTE : ajouter un évènement 'blur' si l'utilisateur quitte le champs?
-
 
 // Function to display error message
 function displayErrorMessages() {
@@ -195,3 +193,30 @@ function displayErrorMessages() {
     }
   }
 }
+
+// Si tous les champs complétés et valider,
+// activer fonction validate() au clic du bouton Submit
+
+
+/*************************/
+/* OPENING CONFIRMATION **/
+/*************************/
+
+// Launch modal confirmation event
+submitBtn.addEventListener("click", validate)
+
+// Launch confirmation modal
+function validate() {
+  modalBody.style.display = "none";
+  confirmationBody.style.display = "block";
+  //calculateHeight();
+}
+
+/***********************/
+/* CLOSE CONFIRMATION **/
+/***********************/
+
+// Close modal confirmation at click event
+closeConfirmationBtn.addEventListener("click", () => {
+  closeModal();
+});

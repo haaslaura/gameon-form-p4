@@ -82,17 +82,17 @@ img {
 
 /****** Header *******/
 .topnav {
-  overflow: hidden;
-  margin: 3.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3.5%;
+  margin-bottom: 3.5%;
 }
 
-.header-logo {
-  float: left;
-}
+.header-logo {float: left;}
 
-.main-navbar {
-  float: right;
-}
+.main-navbar {float: right;}
 
 .topnav a {
   float: left;
@@ -102,26 +102,27 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
-  font-family: Roboto, sans-serif;
+  font-size: 1.13rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
 }
 
 .topnav a:hover {
   background-color: #ff0000;
   color: #ffffff;
-  border-radius: 15px;
+  border-radius: 8px;
+  text-decoration: underline;
 }
 
 .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .topnav .icon {
   display: none;
 }
-
 
 
 /*********************/
@@ -537,7 +538,7 @@ Extra Small : less than 576px
 @media screen and (max-width: 1140px) {
   /*** Hero section ***/
   .header-logo img {
-    height: 25px;
+    height: 1.56rem;
   }
   .hero-headline {
     font-size: 4.7rem;
@@ -548,11 +549,17 @@ Extra Small : less than 576px
 @media screen and (max-width: 899px) {
   /*** Header ***/
   .topnav a {display: none;}
+  
   .topnav a.icon {
     float: right;
     display: block;
+    background-color: #ff0000;
+    border-radius :8px;
+    color: #fff;
   }
+  
   .topnav.responsive {position: relative;}
+  
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -632,14 +639,6 @@ Extra Small : less than 576px
 
 /****** Extra small screen *******/
 @media screen and (max-width: 575px) {
-  /*** Header ***/
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-
   /*** Hero section ***/
   .hero-headline {
     font-size: 2.8rem;

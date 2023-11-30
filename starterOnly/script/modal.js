@@ -4,9 +4,9 @@ This file contains the function for project
 
 *******************************************************/
 
-// Function to switch to the burger menu
+// Function to open the burger menu
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  const x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -38,6 +38,7 @@ function launchModal() {
   calculateHeight();
 }
 
+
 /*********************/
 /**** CLOSE MODAL ****/
 /*********************/
@@ -54,10 +55,26 @@ closeBtn.addEventListener("click", () => {
 
 // Close modal at click outside the modal
 modalbg.addEventListener("click", (event) => {
-    // Check if the click is outside the modal
-    if (event.target === modalbg) {
-        closeModal();
-    }
+  // Check if the click is outside the modal
+  if (event.target === modalbg) {
+    closeModal();
+  }
+});
+
+
+/*************************/
+/** CONFIRMATION MODALE **/
+/*************************/
+
+// Function for launch confirmation modal
+function validate() {
+  modalBody.style.display = "none";
+  confirmationBody.style.display = "block";
+}
+
+// Event to close modal confirmation
+closeConfirmationBtn.addEventListener("click", () => {
+  closeModal();
 });
 
 
@@ -65,16 +82,10 @@ modalbg.addEventListener("click", (event) => {
 /** ERROR MESSAGES ***/
 /*********************/
 
-// Submit event
-form.addEventListener ("submit", (event) => {
-  event.preventDefault();
-  displayErrorMessages();
-  calculateHeight();
-});
-
-
 // Function to display error message
 function displayErrorMessages() {
+
+  let correct = true;
 
   // Retrieve the nodeList formData
   for (i = 0; i < formData.length; i++) {
@@ -91,9 +102,11 @@ function displayErrorMessages() {
       case 'text':
         if (!valueInput){
           console.log("Le champs est vide");
+          correct = false;
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
         } else if (valueInput.length < 2){
           console.log("Erreur dans la longueur du champs texte");
+          correct = false;
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
         } else {
         console.log("Le champs texte est correcte");
@@ -107,9 +120,11 @@ function displayErrorMessages() {
         let regexMail = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+");
         if (!valueInput) {
           console.log("Erreur le champs mail est vide");
+          correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer votre email.");
         } else if (regexMail.test(valueInput) === false) {
           console.log("Erreur ceci n'est pas un email");
+          correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer un email valide.");
         } else {
           console.log("Le mail est correct");
@@ -124,9 +139,11 @@ function displayErrorMessages() {
 
         if (!valueInput) {
           console.log("erreur le champs date est vide");
+          correct = false;
           formData[i].setAttribute("data-error", "Vous devez entrer votre date de naissance.");
         } else if (selectedDate > today) {
           console.log("erreur la date est postérieure à aujourd'hui");
+          correct = false;
           formData[i].setAttribute("data-error", "Erreur: la date est postérieure à aujourd'hui.");
         } else {
           console.log("le champs date est correct");
@@ -138,9 +155,11 @@ function displayErrorMessages() {
       case 'number':
         if (!valueInput) {
           console.log("Le champs nombre est vide");
+          correct = false;
           formData[i].setAttribute("data-error", "Merci de compléter ce champs.");
         } else if (valueInput > 99) {
           console.log("Erreur avec le champs nombre");
+          correct = false;
           formData[i].setAttribute("data-error", "99 maximum.");
         } else {
           console.log("Le champs nombre est correctement rempli");
@@ -165,6 +184,7 @@ function displayErrorMessages() {
 
         if (errorFlag) {
           console.log("Aucune tournois sélectionnée");
+          correct = false;
           formData[i].setAttribute("data-error", "Vous devez choisir une option.");
         } else {
           console.log("Le tournois est correctement sélectionné");
@@ -182,6 +202,7 @@ function displayErrorMessages() {
 
         if (!accepterCU.checked) {
           console.log("La checkbox1 n'est pas cochée");
+          correct = false;
           labelCU.classList.add("error-cu");
           labelCU.setAttribute("data-error", "Vous devez accepter nos conditions d'utilisation pour continuer.");
         } else {
@@ -192,31 +213,18 @@ function displayErrorMessages() {
         break;
     }
   }
+
+  return correct;
 }
 
-// Si tous les champs complétés et valider,
-// activer fonction validate() au clic du bouton Submit
+/*********************/
+/*** SUBMIT EVENT ****/
+/*********************/
 
-
-/*************************/
-/* OPENING CONFIRMATION **/
-/*************************/
-
-// Launch modal confirmation event
-submitBtn.addEventListener("click", validate)
-
-// Launch confirmation modal
-function validate() {
-  modalBody.style.display = "none";
-  confirmationBody.style.display = "block";
-  //calculateHeight();
-}
-
-/***********************/
-/* CLOSE CONFIRMATION **/
-/***********************/
-
-// Close modal confirmation at click event
-closeConfirmationBtn.addEventListener("click", () => {
-  closeModal();
+form.addEventListener ("submit", (event) => {
+  calculateHeight();
+  event.preventDefault();
+  if(displayErrorMessages()) {
+    validate();
+  }
 });

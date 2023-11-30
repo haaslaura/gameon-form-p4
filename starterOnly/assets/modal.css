@@ -642,11 +642,11 @@ Extra Small : less than 576px
   /*** Hero section ***/
   .hero-headline {
     font-size: 2.8rem;
-    white-space: normal;
+    white-space: normal; /* Bug: white-space non-functional*/
   }
   .hero-text {
     font-size: 1.2rem;
-    white-space: normal;
+    white-space: normal; /* Bug: white-space non-functional*/
   }
 
 }

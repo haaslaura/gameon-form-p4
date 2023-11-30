@@ -84,7 +84,8 @@ closeConfirmationBtn.addEventListener("click", () => {
 
 // Function to display error message
 function displayErrorMessages() {
-
+  
+  // Prepare to return a boleen
   let correct = true;
 
   // Retrieve the nodeList formData
@@ -101,15 +102,12 @@ function displayErrorMessages() {
       // Text fields
       case 'text':
         if (!valueInput){
-          console.log("Le champs est vide");
           correct = false;
-          formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
+          formData[i].setAttribute("data-error", "Merci de remplir ce champs.");
         } else if (valueInput.length < 2){
-          console.log("Erreur dans la longueur du champs texte");
           correct = false;
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
         } else {
-        console.log("Le champs texte est correcte");
         formData[i].removeAttribute("data-error");
         }
         break;
@@ -117,15 +115,19 @@ function displayErrorMessages() {
       // Email field
       case 'email':
         // Regular expression to check the email
-        let regexMail = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+");
+        let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i");
+
         if (!valueInput) {
+
           console.log("Erreur le champs mail est vide");
           correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer votre email.");
-        } else if (regexMail.test(valueInput) === false) {
+
+        } else if (!regexMail.test(valueInput)) {
           console.log("Erreur ceci n'est pas un email");
           correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer un email valide.");
+
         } else {
           console.log("Le mail est correct");
           formData[i].removeAttribute("data-error");
@@ -138,15 +140,12 @@ function displayErrorMessages() {
         const selectedDate = new Date(valueInput);
 
         if (!valueInput) {
-          console.log("erreur le champs date est vide");
           correct = false;
           formData[i].setAttribute("data-error", "Vous devez entrer votre date de naissance.");
         } else if (selectedDate > today) {
-          console.log("erreur la date est postérieure à aujourd'hui");
           correct = false;
           formData[i].setAttribute("data-error", "Erreur: la date est postérieure à aujourd'hui.");
         } else {
-          console.log("le champs date est correct");
           formData[i].removeAttribute("data-error");
         }
         break;
@@ -154,15 +153,12 @@ function displayErrorMessages() {
       // Tournament number field
       case 'number':
         if (!valueInput) {
-          console.log("Le champs nombre est vide");
           correct = false;
           formData[i].setAttribute("data-error", "Merci de compléter ce champs.");
         } else if (valueInput > 99) {
-          console.log("Erreur avec le champs nombre");
           correct = false;
           formData[i].setAttribute("data-error", "99 maximum.");
         } else {
-          console.log("Le champs nombre est correctement rempli");
           formData[i].removeAttribute("data-error");
         }
         break;
@@ -183,11 +179,9 @@ function displayErrorMessages() {
         }
 
         if (errorFlag) {
-          console.log("Aucune tournois sélectionnée");
           correct = false;
           formData[i].setAttribute("data-error", "Vous devez choisir une option.");
         } else {
-          console.log("Le tournois est correctement sélectionné");
           formData[i].removeAttribute("data-error");
         }
         break;
@@ -201,12 +195,10 @@ function displayErrorMessages() {
         let labelCU = document.querySelector(".checkbox2-label")
 
         if (!accepterCU.checked) {
-          console.log("La checkbox1 n'est pas cochée");
           correct = false;
           labelCU.classList.add("error-cu");
           labelCU.setAttribute("data-error", "Vous devez accepter nos conditions d'utilisation pour continuer.");
         } else {
-          console.log("La checkbox1 est bien cochée");
           labelCU.classList.remove("error-cu");
           labelCU.removeAttribute("data-error");
         }

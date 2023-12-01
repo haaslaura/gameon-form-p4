@@ -10,7 +10,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const contentModal = document.querySelector(".content");
 const closeBtn = document.querySelector(".close");
-//const submitBtn = document.querySelector(".btn-submit");
 const modalBody = document.querySelector(".modal-body");
 
 // DOM Confirmation Modal Elements
@@ -19,3 +18,6 @@ const closeConfirmationBtn = document.querySelector(".btn-close-confirmation");
 
 // DOM Form Elements
 const form = document.querySelector("form")
+
+// Regular expression to check the email
+let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i");

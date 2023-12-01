@@ -14,7 +14,6 @@ function editNav() {
   }
 }
 
-
 // Function to add a class to the modal if it exceeds the screen size
 function calculateHeight() {
   if (contentModal.clientHeight >= window.innerHeight) {
@@ -23,7 +22,6 @@ function calculateHeight() {
     contentModal.classList.remove("overflow");
   }
 }
-
 
 /*********************/
 /*** OPENING MODAL ***/
@@ -37,7 +35,6 @@ function launchModal() {
   modalbg.style.display = "block";
   calculateHeight();
 }
-
 
 /*********************/
 /**** CLOSE MODAL ****/
@@ -55,7 +52,6 @@ closeBtn.addEventListener("click", () => {
 
 // Close modal at click outside the modal
 modalbg.addEventListener("click", (event) => {
-  // Check if the click is outside the modal
   if (event.target === modalbg) {
     closeModal();
   }
@@ -99,6 +95,7 @@ function displayErrorMessages() {
 
     // List of errors and messages
     switch (typeInputCase) {
+      
       // Text fields
       case 'text':
         if (!valueInput){
@@ -114,22 +111,13 @@ function displayErrorMessages() {
 
       // Email field
       case 'email':
-        // Regular expression to check the email
-        let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i");
-
         if (!valueInput) {
-
-          console.log("Erreur le champs mail est vide");
           correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer votre email.");
-
         } else if (!regexMail.test(valueInput)) {
-          console.log("Erreur ceci n'est pas un email");
           correct = false;
           formData[i].setAttribute("data-error", "Merci de nous indiquer un email valide.");
-
         } else {
-          console.log("Le mail est correct");
           formData[i].removeAttribute("data-error");
         }
         break;
@@ -205,7 +193,7 @@ function displayErrorMessages() {
         break;
     }
   }
-
+  calculateHeight();
   return correct;
 }
 

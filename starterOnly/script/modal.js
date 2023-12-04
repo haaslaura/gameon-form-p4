@@ -45,10 +45,12 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-// Close modal at click event
-closeBtn.addEventListener("click", () => {
+// Add the button close function to the click event
+const arrayBtn = [closeBtn, closeConfirmationBtn];
+arrayBtn.forEach((close) => close.addEventListener("click", () => {
   closeModal();
-});
+}))
+
 
 // Close modal at click outside the modal
 modalbg.addEventListener("click", (event) => {
@@ -68,11 +70,6 @@ function validate() {
   confirmationBody.style.display = "block";
 }
 
-// Event to close modal confirmation
-closeConfirmationBtn.addEventListener("click", () => {
-  closeModal();
-});
-
 
 /*********************/
 /** ERROR MESSAGES ***/
@@ -81,7 +78,7 @@ closeConfirmationBtn.addEventListener("click", () => {
 // Function to display error message
 function displayErrorMessages() {
   
-  // Prepare to return a boleen
+  // Prepare to return a booleen
   let correct = true;
 
   // Retrieve the nodeList formData
@@ -193,6 +190,7 @@ function displayErrorMessages() {
         break;
     }
   }
+  
   calculateHeight();
   return correct;
 }
@@ -204,6 +202,7 @@ function displayErrorMessages() {
 form.addEventListener ("submit", (event) => {
   calculateHeight();
   event.preventDefault();
+  // If correct is true, lauch validate() function
   if(displayErrorMessages()) {
     validate();
   }

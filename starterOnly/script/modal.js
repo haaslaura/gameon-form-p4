@@ -4,25 +4,6 @@ This file contains the function for project
 
 *******************************************************/
 
-// Function to open the burger menu
-function editNav() {
-  const x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
-// Function to add a class to the modal if it exceeds the screen size
-function calculateHeight() {
-  if (contentModal.clientHeight >= window.innerHeight) {
-    contentModal.classList.add("overflow");
-  } else {
-    contentModal.classList.remove("overflow");
-  }
-}
-
 /*********************/
 /*** OPENING MODAL ***/
 /*********************/
@@ -34,6 +15,15 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
   calculateHeight();
+}
+
+// Function to add a class to the modal if it exceeds the screen size
+function calculateHeight() {
+  if (contentModal.clientHeight >= window.innerHeight) {
+    contentModal.classList.add("overflow");
+  } else {
+    contentModal.classList.remove("overflow");
+  }
 }
 
 /*********************/

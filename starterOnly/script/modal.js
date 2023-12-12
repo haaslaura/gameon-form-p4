@@ -92,7 +92,7 @@ function displayErrorMessages() {
           correct = false;
           formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
         } else {
-        formData[i].removeAttribute("data-error");
+          formData[i].removeAttribute("data-error");
         }
         break;
 
